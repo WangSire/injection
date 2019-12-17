@@ -1,6 +1,6 @@
 # injection
 
-###大体流程
+### 大体流程
 1. 当我们修改一个文件并进行保存时，InjectionServer 就会执行 rebuildClass ，重新编译（编译后会动态生成一个相同的新类，在新类中存有新增的函数以及修改后的函数），打包成动态库 (提示：每次保存时，不管内容是否发生改变，都会生成一个动态库)！打包成动态库后调用 writeSting(路径地址) 方法 
 2.通过 Socket 通知运行的 App调用inject(tmpfile: String)，tmpfile为动态库的文件路径。然后通过SwiftEval.instance.loadAndInject(tmpfile: tmpfile)，使用dlopen把动态库装载到App中，获取动态库的符号地址，使用dlsym找到编译时新生成的类，并返回
 ```
